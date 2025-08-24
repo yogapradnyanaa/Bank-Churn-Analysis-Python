@@ -169,4 +169,15 @@ There are **6 numerical variables** in the dataset:
 
 <img width="915" height="773" alt="image" src="https://github.com/user-attachments/assets/a6ab2c0e-8585-41a1-ae4b-9c2e6bca5d8a" />
 
+#### 🔹 Numerical Variables Distribution  
+
+Based on the histogram analysis:  
+
+- **CreditScore** → Distribution is close to normal, with most customers in the 600–700 range. A few outliers exist below 400 and above 850, indicating generally good credit profiles.  
+- **Age** → Right-skewed distribution, peaking at ages 30–40. The number of customers declines after age 50, showing dominance of the productive age group.  
+- **Tenure** → Relatively evenly distributed between 1–10 years, with a slight drop in the first year.  
+- **Balance** → Highly right-skewed, showing two distinct groups: customers with zero balance and customers with large balances.  
+- **EstimatedSalary** → Almost evenly distributed across the income range, reflecting diversity in customer income levels.  
+- **Point Earned** → Relatively uniform distribution with a slight peak between 300–800 points, suggesting common target or achievement thresholds among customers.  
+
 
