@@ -181,3 +181,227 @@ Based on the histogram analysis:
 - **Point Earned** → Relatively uniform distribution with a slight peak between 300–800 points, suggesting common target or achievement thresholds among customers.  
 
 
+#### 🔹 Categorical Variables Distribution  
+
+<img width="645" height="557" alt="image" src="https://github.com/user-attachments/assets/d50526e7-5612-49b0-8255-5581cee9f619" />
+
+Based on the analysis of categorical variables:  
+
+- **Geography** → The majority of customers come from **France**.  
+- **Gender** → Distribution between male and female customers is nearly balanced.  
+- **Number of Products** → Most customers own **1–2 products**, while ownership of **3–4 products** is very rare.  
+- **HasCrCard** → Credit card ownership is relatively high among customers.  
+- **IsActiveMember** → The proportion of active vs non-active members is almost equal.  
+- **Exited** → The majority of customers did **not churn (Exited = 0)**.  
+- **Complain** → Most customers have **never filed a complaint (Complain = 0)**.  
+- **Satisfaction Score** → Evenly distributed across the **1–5 scale**.  
+- **Card Type** → Distribution is relatively balanced among **Diamond, Gold, Silver, and Platinum** categories.
+
+
+### B. Bivariate Analysis  
+
+In this step, the focus is on examining the relationship between **two variables** usually comparing independent variables with the target variable (`Exited`).  
+
+Since the target variable is binary (0 = loyal, 1 = churn), the following visualization techniques are used:
+
+- **Bar Charts** → to compare the proportion of churned vs loyal customers across categorical variables (e.g., Gender, Geography, Card Type, IsActiveMember).  
+- **Box Plots** → to compare the distribution of numerical variables (e.g., Age, Balance, EstimatedSalary, CreditScore) between churned and loyal customers.  
+
+These visualizations make it easier to detect patterns and highlight factors that may influence customer churn.  
+
+#### 🔹 Bivariate Analysis – Numerical Variables vs Churn 
+
+<img width="995" height="452" alt="image" src="https://github.com/user-attachments/assets/91ee6153-4d3d-4962-a63a-ec38c33a6023" />
+
+Based on the boxplot analysis between numerical variables and the target (`Exited`):  
+
+- **CreditScore** → Customers who churn (`Exited = 1`) tend to have slightly lower credit scores compared to loyal customers.  
+- **Age** → Shows a clear difference: churned customers are generally older (median above 40), while loyal customers are around their mid-30s.  
+- **Tenure** → No significant difference in distribution between churned and loyal customers.  
+- **Balance** → Median values are similar for both groups, though churned customers show slightly higher variability.  
+- **EstimatedSalary** → Distribution is almost identical between churned and non-churned groups, suggesting limited influence on churn.  
+- **Point Earned** → Both groups show similar patterns, but churned customers tend to have a slightly higher median of points.  
+
+📌 **Key Insight:** Among the numerical variables, **Age** appears to be the most distinguishing factor influencing customer churn.
+
+#### 🔹 Bivariate Analysis – Categorical Variables vs Churn 
+
+<img width="940" height="427" alt="image" src="https://github.com/user-attachments/assets/47d58cdc-22c3-45b2-821b-5a9844f79c77" />
+
+Based on the visualization between categorical variables and the target (`Exited`):  
+
+- **Geography** → Churn is more frequent among customers from **Germany**, while customers from **France** show the lowest churn proportion.  
+- **Gender** → Female customers show a slightly higher churn rate compared to males.  
+- **NumOfProducts** → Customers with **1 product** have the highest churn, while those with 3–4 products are fewer in number but still experience churn.  
+- **HasCrCard** → Customers who own a credit card churn less frequently compared to those without a card.  
+- **IsActiveMember** → Inactive customers are significantly more likely to churn than active ones.  
+- **Complain** → Customers who have submitted complaints exhibit higher churn rates.  
+- **Satisfaction Score** → Churn occurs at all satisfaction levels (1–5) with relatively similar proportions, showing no strong pattern.  
+- **Card Type** → Churn is relatively evenly distributed across **Diamond, Gold, Silver, and Platinum** cardholders, with no significant differences.  
+
+📌 **Key Insight:** Categorical variables such as **Geography** and **IsActiveMember** appear to be strong indicators of churn behavior, while variables like **Satisfaction Score** and **Card Type** show weaker influence. 
+
+
+#### 🔹 Correlation Analysis  
+
+Correlation analysis is part of **bivariate analysis**, as it examines the relationship between **two numerical variables**.  
+This step is important because: 
+
+- It helps identify whether variables move together (positive correlation) or in opposite directions (negative correlation).
+- It provides early insights into which variables are potentially influential or irrelevant in explaining churn.
+
+##### 1. Continuous Numerical Variables vs Exited  
+<img width="663" height="223" alt="image" src="https://github.com/user-attachments/assets/881d06ea-6638-4721-a323-690ea75258c2" />
+
+##### 2. Categorical Variables vs Exited  
+<img width="577" height="255" alt="image" src="https://github.com/user-attachments/assets/bf7736e2-5a20-4f3d-8194-b975bf2d9c93" />
+
+
+Correlation analysis was conducted to examine how both **numerical** and **categorical** variables relate to customer churn (`Exited`).  
+
+- From the **numerical variables**, **Age** shows the strongest correlation with churn (**r = 0.285**), indicating that older customers are more likely to leave. **Balance** also has a weak positive correlation (**r = 0.119**). Other variables such as **EstimatedSalary, Point Earned, Tenure, and CreditScore** show very weak relationships, suggesting minimal impact on churn.  
+
+- From the **categorical variables**, **Complain** has an extremely strong association with churn (**Cramér’s V = 0.995**), making it the most dominant factor. **NumOfProducts** has a moderate relationship (**0.387**), while **Geography** shows a weak one (**0.173**). Other features such as **IsActiveMember** and **Gender** have very weak influence, and **Card Type, HasCrCard, and Satisfaction Score** show almost no meaningful effect.  
+
+📌 **Key Insight:**  
+The most influential factors for churn are **Complain**, followed by **NumOfProducts** and **Age**. These variables should be prioritized in further analysis and predictive modeling to improve customer retention strategies.
+
+
+### C. Multivariate Analysis  
+
+Multivariate analysis is performed to examine the interaction between **three or more variables simultaneously**.  
+
+### 🔧 Data Encoding for Logistic Regression  
+
+Before fitting the logistic regression model, categorical variables must be encoded into numerical format.  
+Steps performed:  
+
+1. **One-Hot Encoding** applied to `Geography`, `Gender`, and `Card Type`.  
+2. **Identifier columns** (`RowNumber`, `CustomerId`, `Surname`) dropped since they do not contribute to prediction.  
+3. **Boolean columns** converted into integers (`0/1`) to ensure all predictors are numeric.  
+
+This prepares the dataset for logistic regression modeling.  
+
+```python
+# One-Hot Encoding categorical variables
+df_encoded = pd.get_dummies(
+    customer_churn,
+    columns=['Geography', 'Gender', 'Card Type'],
+    drop_first=False,
+    dtype=bool
+)
+
+print(df_encoded.head())
+print(df_encoded.dtypes.head(15))
+
+# Drop non-predictor identifier columns
+df_encoded = df_encoded.drop(columns=["RowNumber", "CustomerId", "Surname"], errors="ignore")
+
+# Convert boolean columns into integers (0/1)
+bool_cols = df_encoded.select_dtypes(include="bool").columns
+df_encoded[bool_cols] = df_encoded[bool_cols].astype(int)
+
+# Check data types after conversion
+print(df_encoded.dtypes.tail(10))
+```
+
+```python
+# === LOGIT Multivariate (robust-ready) ===
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+
+# >>> Assumes `df` contains the raw or semi-encoded data (e.g., Churn_Modelling.csv)
+# If needed: df = pd.read_csv("Churn_Modelling.csv")
+
+# 1) Drop non-informative identifiers
+df = df.drop(columns=["RowNumber", "CustomerId", "Surname"], errors="ignore")
+
+# 2) Ensure target exists
+if "Exited" not in df.columns:
+    raise ValueError("Target column 'Exited' not found in df.")
+
+# 3) One-Hot Encode available categoricals (exclude target)
+cat_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
+cat_cols = [c for c in cat_cols if c != "Exited"]
+if len(cat_cols) > 0:
+    df = pd.get_dummies(df, columns=cat_cols, drop_first=True)
+
+# 4) Split X, y
+y = df["Exited"].astype(int)
+X = df.drop(columns=["Exited"]).copy()
+
+# 5) Type fixes:
+#    - bool -> int (0/1)
+#    - force all to numeric (weird strings -> NaN), then median-impute
+bool_cols = X.select_dtypes(include="bool").columns
+if len(bool_cols) > 0:
+    X[bool_cols] = X[bool_cols].astype(int)
+
+X = X.apply(pd.to_numeric, errors="coerce")
+X = X.fillna(X.median(numeric_only=True))
+
+# 6) Remove zero-variance columns (constant) to avoid singular matrix
+zero_var = [c for c in X.columns if X[c].nunique() <= 1]
+if zero_var:
+    print("Dropping zero-variance columns:", zero_var)
+    X = X.drop(columns=zero_var)
+
+# (Optional) remove perfectly duplicated columns
+dup_cols = X.T[X.T.duplicated()].index.tolist()
+if dup_cols:
+    print("Dropping duplicate columns:", dup_cols)
+    X = X.drop(columns=dup_cols)
+
+# 7) Fit Logit
+X = sm.add_constant(X, has_constant="add")
+model = sm.Logit(y, X)
+result = model.fit(disp=False)
+
+print(result.summary())
+
+# 8) Odds Ratio + p-value
+odds = pd.DataFrame({
+    "Variable": result.params.index,
+    "Coef": result.params.values,
+    "OddsRatio": np.exp(result.params.values),
+    "p_value": result.pvalues.values
+}).sort_values("p_value")
+
+print("\n=== Odds Ratio & Significance (sorted by p-value) ===")
+print(odds.to_string(index=False))
+```
+
+<img width="627" height="489" alt="image" src="https://github.com/user-attachments/assets/21cda3e9-2b9a-424a-ae33-af8d9e83b3e0" />
+
+<img width="417" height="318" alt="image" src="https://github.com/user-attachments/assets/2810aa28-65f9-4dd1-8e4e-a9ecd74dea38" />
+
+### Key Findings from Logistic Regression  
+
+Based on the logistic regression analysis, there are three main factors that strongly influence customer churn:  
+
+1. **Complain History**  
+   - Customers who have submitted complaints are **far more likely to churn** compared to those who have not.  
+   - This is the single most dominant driver of churn.  
+
+2. **Age**  
+   - Older customers show a significantly higher probability of leaving.  
+   - The likelihood of churn increases by roughly **10% for every additional year of age**.  
+
+3. **Active Member Status**  
+   - Active customers are much more loyal.  
+   - Being an active member greatly reduces the chance of churn.  
+
+Other variables such as **CreditScore, Tenure, Balance, Number of Products, Card Type, EstimatedSalary, Gender, and Geography** show no significant impact on churn.  
+
+📌 **Strategic Implication:**  
+Churn management strategies should prioritize:  
+- Reducing and addressing **customer complaints**.  
+- Providing targeted retention programs for **older customers**.  
+- Encouraging customers to remain **active users** of banking services.  
+
+
+
+
+
+
