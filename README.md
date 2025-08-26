@@ -134,7 +134,7 @@ After uploading the dataset, the first step is to **explore its structure** and 
 - **Column Names:** All column names are consistent and properly labeled. ✅  
 
 
-## 🔍 Analyze
+## 4. 🔍 Analyze
 
 In this phase, **Exploratory Data Analysis (EDA)** is performed to better understand the dataset before building predictive models.  
 EDA is crucial because:  
@@ -398,10 +398,34 @@ Other variables such as **CreditScore, Tenure, Balance, Number of Products, Card
 Churn management strategies should prioritize:  
 - Reducing and addressing **customer complaints**.  
 - Providing targeted retention programs for **older customers**.  
-- Encouraging customers to remain **active users** of banking services.  
+- Encouraging customers to remain **active users** of banking services.
 
 
+## 📢 5. Share  
+
+At this stage, the goal is to **communicate findings clearly** to stakeholders using accessible visualizations.  
+While the detailed statistical analysis (correlation, logistic regression) was done in the **Analyze** step, here we focus on creating **simple, descriptive graphics** to help non-technical audiences understand the customer profile.  
+
+### [Bank Churn Analysis – Tableau Public](https://public.tableau.com/views/BankChurnAnalysis_17556692933930/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+<img width="957" height="637" alt="image" src="https://github.com/user-attachments/assets/aee6a3a9-7c30-481a-be37-51b74c386129" />
 
 
+## ✅ 6. Act  
 
+The logistic regression analysis revealed that there are **three main factors** most strongly associated with customer churn.  
+First, **complain history** has an extremely large impact: customers who have submitted complaints are far more likely to churn than those who have not.  
+Second, **age** is also significant: the older the customer, the higher the probability of churn, with an increase of about 10% for every additional year.  
+Third, **activity status** plays a decisive role: active members are much more loyal, while inactive ones are at far greater risk of leaving.  
 
+Other variables such as credit score, tenure, balance, number of products, card type, estimated salary, gender, and even geography did not show strong statistical significance in the model.  
+However, exploratory analysis still pointed out some relevant patterns — for instance, customers in **Germany** exhibited higher churn rates compared to France and Spain, and customers holding **three or more products** tended to churn more, which may reflect negative effects of over-cross-selling.  
+
+📌 **Strategic Recommendations**  
+- **Address complaints promptly**: treat them as the clearest early warning signal for churn.  
+- **Focus on older customers**: design retention programs, loyalty rewards, or dedicated services to reduce their churn risk.  
+- **Encourage active usage**: launch re-engagement campaigns, targeted promotions, or usage-based incentives to keep members active.  
+- **Strengthen service in Germany**: implement more proactive and localized customer support.  
+- **Be selective with cross-selling**: avoid overwhelming customers with too many products at once.  
+
+By acting on these findings, the bank can directly tackle the strongest churn drivers while also addressing secondary risk factors, leading to reduced churn rates, higher customer lifetime value, and stronger long-term loyalty.  
