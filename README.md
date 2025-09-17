@@ -419,7 +419,7 @@ Second, **age** is also significant: the older the customer, the higher the prob
 Third, **activity status** plays a decisive role: active members are much more loyal, while inactive ones are at far greater risk of leaving.  
 
 Other variables such as credit score, tenure, balance, number of products, card type, estimated salary, gender, and even geography did not show strong statistical significance in the model.  
-However, exploratory analysis still pointed out some relevant patterns — for instance, customers in **Germany** exhibited higher churn rates compared to France and Spain, and customers holding **three or more products** tended to churn more, which may reflect negative effects of over-cross-selling.  
+However, exploratory analysis still pointed out some relevant patterns for instance, customers in **Germany** exhibited higher churn rates compared to France and Spain, and customers holding **three or more products** tended to churn more, which may reflect negative effects of over-cross-selling.  
 
 📌 **Strategic Recommendations**  
 - **Address complaints promptly**: treat them as the clearest early warning signal for churn.  
